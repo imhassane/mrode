@@ -1,0 +1,25 @@
+enum IdentityStatus {
+    NOT_ACTIVATED,
+    ACTIVATED
+    DELETED
+    BLOCKED
+}
+
+enum IdentityRole {
+    DEV
+    SUPER_USER
+    EMPLOYEE
+}
+
+type Identity @key(fields: "id") {
+    id: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    avatar: String!
+    permissions: [String!]
+    status: IdentityStatus
+    role: IdentityRole
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}

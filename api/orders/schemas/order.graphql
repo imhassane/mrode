@@ -1,0 +1,52 @@
+enum OrderStatus {
+    UNPAID,
+    WAITING,
+    ACCEPTED,
+    PREPARATION,
+    PREPARATION_DONE,
+    DISPATCHED
+}
+
+input OrderProductInput {
+    id: ID!
+    optionId: ID!
+    quantity: Int!
+}
+
+type OrderProduct {
+    id: ID!
+    optionId: ID!
+    plusValue: Float!
+    quantity: Int!
+}
+
+type OrderBill {
+    id: ID!
+    num: String!
+    price: Float!
+}
+
+type Order @key(fields: "id") {
+    id: ID!
+    num: String!
+    price: Float!
+    firstName: String!
+    lastName: String!
+    address: String!
+    status: OrderStatus!
+    acceptedAt: DateTime
+    preparationBeganAt: DateTime
+    preparationDoneAt: DateTime
+    dispatchedAt: DateTime
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type OrdersResume {
+    unpaidOrders: Int!
+    waitingOrders: Int!
+    acceptedOrders: Int!
+    preparationBeganOrders: Int!
+    preparationDoneOrders: Int!
+    dispatchedOrders: Int!
+}

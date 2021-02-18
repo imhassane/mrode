@@ -1,0 +1,43 @@
+enum AuthTokenType { MLM, ADMINISTRATION }
+type AuthToken {
+    type: AuthTokenType!
+    token: ID!
+}
+
+extend type Query {
+    me: Identity!
+
+    getCustomer(id: ID!): Customer!
+    getMlmMember(id: ID!): MlmMember!
+    authenticatedMlmMember: MlmMember!
+
+    getMlmMemberCollaborators(id: ID!): Associates!
+    getMlmMemberAddresses(id: ID!): [Address!]!
+}
+
+extend type Mutation {
+    createIdentity(email: String!, password: String!, role: IdentityRole!): Identity!
+
+    # Members
+    createMember(fullName: String!, email: String!, role: MemberType!): MemberRegistrationResume
+    authenticateMember(accessCode: Int!, accessPassword: Int!): AuthToken!
+
+    # Customers
+    createCustomerWithAddress(
+        email: String!, firstName: String!, lastName: String!
+        postalCode: String!, address: String!,
+        city: String!, country: String!
+    ): Customer!
+
+    # Mlm Members
+    authenticateMlmMember(code: String!, password: String!): AuthToken!
+    inviteMlmMember(email: String!): String!
+    verifyMlmAccessCode(code: String!): Boolean!
+    createMlmMember(
+        code: String!, password: String!, avatar: String!, avatarUrl: String!,
+        firstName: String!, lastName: String!, siret: String!
+    ): MlmMember!
+    addAddress(city: String!, postalCode: Int!, streetName: String!, streetNumber: String!, country: String!): Address!
+    deleteAddress(id: ID!): Address!
+    setCurrentAddress(id: ID!): Address!
+}

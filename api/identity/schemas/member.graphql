@@ -1,0 +1,27 @@
+type Member @key(fields: "id") {
+    id: ID!
+    fullName: String!
+    email: String!
+    role: MemberType!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+enum MemberType {
+    ADMIN
+    DEV
+    EMPLOYEE
+}
+
+type MemberRegistrationResume {
+    accessCode: Int!
+    accessPassword: Int!
+}
+
+extend type Order @key(fields: "id") {
+    id: ID! @external
+    acceptedBy: Member
+    preparationBeganBy: Member
+    preparationDoneBy: Member
+    dispatchedBy: Member
+}

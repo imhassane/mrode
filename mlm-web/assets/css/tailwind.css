@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-700;
+  }
+  h1 {
+    @apply font-bold text-3xl;
+  }
+  label {
+    @apply block text-sm mb-2;
+  }
+  input {
+    @apply border rounded bg-gray-50 px-2 py-1 text-gray-500;
+  }
+  button {
+    @apply border rounded text-sm text-white shadow px-2 py-2;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 md:px-12;
+  }
+
+  .btn-primary {
+    @apply bg-black border-black;
+  }
+
+  .btn-red {
+    @apply bg-red-700 border-red-700;
+  }
+
+  .error-text {
+    @apply text-red-500 text-sm mt-2 mb-3;
+  }
+
+  .error-block {
+    @apply border-red-700 p-3 rounded border-l-4 bg-red-500 text-white text-sm;
+  }
+
+  .infos-block {
+    @apply border-green-700 p-3 rounded border-l-4 bg-green-500 text-white text-sm;
+  }
+}

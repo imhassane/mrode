@@ -1,0 +1,41 @@
+{
+  "name": "mlm-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "mlm": "nuxt --port 3005",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxt/content": "^1.9.0",
+    "@nuxtjs/apollo": "^4.0.1-rc.5",
+    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/cloudinary": "^1.0.3-beta-3",
+    "@nuxtjs/pwa": "^3.0.2",
+    "@svgdotjs/svg.js": "^3.0.16",
+    "chart.js": "^2.9.4",
+    "cookie-parser": "^1.4.5",
+    "cookie-universal-nuxt": "^2.1.4",
+    "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "graphql-tag": "^2.11.0",
+    "nuxt": "^2.14.6",
+    "nuxt-i18n": "^6.18.0",
+    "pg": "^8.5.1",
+    "session-file-store": "^1.5.0",
+    "vue-chartjs": "^3.5.1",
+    "vue-dynamic-star-rating": "^1.0.8"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^3.4.2",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "autoprefixer": "^9.8.6",
+    "dotenv": "^8.2.0",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
+  }
+}

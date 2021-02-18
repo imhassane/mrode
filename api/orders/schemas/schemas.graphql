@@ -1,0 +1,16 @@
+extend type Query {
+    getNonClosedOrders(count: Int!): [Order!]!
+    getOrdersWithStatus(start: Int!, count: Int!, status: OrderStatus!): [Order!]!
+    getOrder(id: ID!): Order!
+    getOrdersResume: OrdersResume!
+}
+
+extend type Mutation {
+    createOrder(
+        customerId: ID!,
+        firstName: String!, lastName: String!, address: String!,
+        products: [OrderProductInput]!
+    ): OrderBill!
+
+    updateOrderStatus(id: ID!, status: OrderStatus!): Order!
+}

@@ -1,0 +1,46 @@
+{
+  "name": "catalogue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api:catalogue": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/federation": "^0.20.7",
+    "apollo-server": "^2.19.1",
+    "call-bind": "^1.0.0",
+    "combined-stream": "^1.0.8",
+    "depd": "^1.1.2",
+    "deprecated-decorator": "^0.1.6",
+    "destroy": "^1.0.4",
+    "ee-first": "^1.1.1",
+    "encodeurl": "^1.0.2",
+    "escape-html": "^1.0.3",
+    "etag": "^1.8.1",
+    "eventemitter3": "^3.1.2",
+    "fast-json-stable-stringify": "^2.1.0",
+    "forwarded": "^0.1.2",
+    "fresh": "^0.5.2",
+    "fs-capacitor": "^2.0.4",
+    "function-bind": "^1.1.1",
+    "get-intrinsic": "^1.0.2",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "graphql-type-datetime": "^0.2.4",
+    "has": "^1.0.3",
+    "has-symbols": "^1.0.1",
+    "inherits": "^2.0.4",
+    "ipaddr.js": "^1.9.1",
+    "is-callable": "^1.2.2",
+    "pg": "^8.5.1",
+    "slugify": "^1.4.6"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  },
+  "description": ""
+}

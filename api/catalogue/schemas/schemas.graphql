@@ -1,0 +1,46 @@
+extend type Query {
+    getCategories(start: Int!, count: Int!): [Category!],
+    getCategory(id: ID!): Category!
+
+    getProducts(start: Int!, count: Int!): [Product]!
+    getStoreProducts(start: Int!, count: Int!): [Product!]!
+    getProduct(id: ID!): Product!
+
+    getGamme(id: ID!): Gamme!
+    getGammes(start: Int!, count: Int!): [Gamme!]!
+}
+
+extend type Mutation {
+    # Categories
+    createCategory(name: String!, description: String!): Category!
+    updateCategory(id: ID!, name: String!): Category!
+
+    # Products
+    createProduct(
+        name: String!, description: String!, article: String!,
+        reference: String!, price: Float!, margin: Float!,
+        sellingStart: String, sellingEnd: String,
+        colors: [String!]!, weight: [Int!],
+        categories: [Int!]
+    ): Product!
+    updateProductStatus(id: ID!, status: ProductStatus!): Product!
+
+    updateOptionStock(id: ID!, newStock: Int!): ProductOption!
+    createOption(
+        color: String!, weight: Int!,
+        productId: ID!, plusValue: Float!,
+        barCode: String!
+    ): ProductOption!
+    deleteOption(id: ID!): ProductOption!
+    updateOptionVisibility(id: ID!): ProductOption!
+    updateOption(optionId: ID!, barCode: String!, plusValue: Float!, status: ProductStatus!): ProductOption!
+
+    # Covers
+    addProductCover(productId: ID!, url: String!, objectId: String!): Cover!
+    removeProductCover(id: ID!): Cover!
+    setCoverToMain(id: ID!, productId: ID!): Cover!
+    switchCoverVisibleState(id: ID!): Cover!
+
+    # Gammes
+    createGamme(name: String!, description: String!, products: [Int!]): Gamme!
+}

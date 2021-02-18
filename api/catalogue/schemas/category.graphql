@@ -1,0 +1,9 @@
+type Category @key(fields: "id") {
+    id: ID!
+    name: String!
+    description: String!
+    visible: Boolean!
+    products(start: Int!, count: Int!): [Product!]!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}

@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply font-bold text-3xl mb-3;
+  }
+
+  label {
+    @apply text-sm block;
+  }
+
+  input {
+    @apply border border-gray-500 rounded px-2 py-1 text-gray-700;
+  }
+
+   button {
+     @apply border px-2 py-1 rounded;
+   }
+}
+
+@layer components {
+  .btn-primary {
+    @apply text-white bg-green-500 border-green-500;
+  }
+
+  .error-block {
+    @apply border-red-700 p-3 rounded border-l-4 bg-red-500 text-white text-sm;
+  }
+
+  .infos-block {
+    @apply border-green-700 p-3 rounded border-l-4 bg-green-500 text-white text-sm;
+  }
+}

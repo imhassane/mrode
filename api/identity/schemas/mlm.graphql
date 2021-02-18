@@ -1,0 +1,49 @@
+enum MlmMemberStatus {
+    INACTIVE, ACTIVE, BLOCKED, DELETED, WAITING_VALIDATION
+}
+
+type MlmMember @key(fields: "id") {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    status: MlmMemberStatus!
+    confirmedAt: DateTime
+    confirmedBy: Member
+    emailValidatedAt: DateTime
+    avatar: String!
+    avatarUrl: String!
+    # Informations officielles.
+    documents: Documents!
+    addresses: [Address!]!
+    address: Address
+    # Associés
+    collaborators: Associates
+    insertedAt: DateTime
+    updatedAt: DateTime
+}
+
+type Associates {
+    adder: MlmMember
+    hierarchy: [MlmMember!]!
+}
+
+type Street {
+    name: String!
+    number: String!
+}
+
+type Address {
+    id: ID!
+    city: String!
+    postalCode: Int!
+    country: String!
+    street: Street!
+    mainAddress: Boolean!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Documents {
+    siret: String!
+}

@@ -1,0 +1,68 @@
+enum ProductFilter {
+    ALL
+    OUT_OF_STOCK
+    UNAVAILABLE
+    AVAILABLE
+    PRE_ORDER
+}
+
+enum ProductStatus {
+    OUT_OF_STOCK
+    UNAVAILABLE
+    AVAILABLE
+    PRE_ORDER
+}
+
+type Product @key(fields: "id") {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String
+    article: String
+    reference: String!
+    price: String!
+    marketPrice: String!
+    margin: Float!
+    mainCover: Cover
+    covers: [Cover!]
+    status: ProductStatus!
+    categories: [Category!]
+    options: [ProductOption!]!
+    availableOptions: [ProductOption!]!
+    colors: [String!]!
+    weights: [Int!]!
+    sellingStartAt: DateTime
+    sellingEndAt: DateTime
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type ProductOption {
+    id: ID!
+    option: String!
+    color: String!
+    weight: Int!
+    active: Boolean!
+    plusValue: Float!
+    barCode: String
+    realQuantity: Int!
+    estimatedQuantity: Int!
+    quantity: Int!
+    minQuantity: Int!
+    availableQuantity: Int!
+    total: Int!
+    status: ProductStatus!
+}
+
+type OrderProductDetails {
+    product: Product!
+    option: ProductOption!
+    cover: Cover!
+    orderQuantity: Int!
+    orderPrice: Float!
+}
+
+extend type Order @key(fields: "id") {
+    id: ID! @external
+    orderProducts: [OrderProductDetails!]!
+}
