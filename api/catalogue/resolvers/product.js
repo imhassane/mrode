@@ -1,4 +1,4 @@
-const { ApolloError, UserInputError } = require("apollo-server");
+const { ApolloError, UserInputError, AuthenticationError } = require("apollo-server");
 const slugify = require("slugify");
 
 const db = require("../db");
@@ -305,13 +305,78 @@ const orderProducts = async (order) => {
        };
     });
     return products;
+};
+
+const getFavorites = async (_parent, _args, ctx) => {
+    if(!ctx.mlmUser)
+        throw new AuthenticationError(ctx.i18n.notAuthenticated);
+
+    try {
+        const { rows } = await db.pool.query(db.queries.GET_FAVORITE_PRODUCTS, [ctx.mlmUser]);
+        return rows.map(utils.makeProduct);
+    } catch {
+        throw new ApolloError(ctx.i18n.internalError);
+    }
+}
+
+const addProductToFavorites = async (_, { id }, ctx) => {
+    if(!ctx.mlmUser)
+        throw new AuthenticationError(ctx.i18n.notAuthenticated);
+
+    const client = await db.pool.connect();
+    try {
+        await client.query('BEGIN');
+        const { rows } = await client.query(
+            db.queries.ADD_PRODUCT_TO_FAVORITES,
+            [id, ctx.mlmUser]
+        );
+
+        await client.query(db.queries.ADD_MLM_USER_PRODUCT_COUNT, [ctx.mlmUser]);
+        await client.query('COMMIT');
+        client.release();
+
+        return rows[0].pro_id;
+    } catch {
+        try {
+            await client.query('ROLLBACK');
+            client.release();
+        } catch {}
+        throw new ApolloError(ctx.i18n.internalError);
+    }
+};
+
+const removeProductFromFavorites = async (_, { id }, ctx) => {
+    if(!ctx.mlmUser)
+        throw new AuthenticationError(ctx.i18n.notAuthenticated);
+
+    const client = await db.pool.connect();
+    try {
+        await client.query('BEGIN');
+        const { rows } = await client.query(
+            db.queries.REMOVE_PRODUCT_FROM_FAVORITES,
+            [id, ctx.mlmUser]
+        );
+
+        await client.query(db.queries.SUB_MLM_USER_PRODUCT_COUNT, [ctx.mlmUser]);
+        await client.query('COMMIT');
+        client.release();
+
+        return rows[0].pro_id;
+    } catch {
+        try {
+            await client.query('ROLLBACK');
+            client.release();
+        } catch {}
+        throw new ApolloError(ctx.i18n.internalError);
+    }
 }
 
 module.exports = {
     Query: {
         getProducts,
         getStoreProducts,
-        getProduct
+        getProduct,
+        getFavorites,
     },
     Mutation: {
         createProduct,
@@ -324,6 +389,8 @@ module.exports = {
         switchCoverVisibleState,
         removeProductCover,
         updateProductStatus,
+        addProductToFavorites,
+        removeProductFromFavorites
     },
     Product: {
         options: getProductOptions,

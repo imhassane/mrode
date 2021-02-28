@@ -8,6 +8,8 @@ extend type Query {
 
     getGamme(id: ID!): Gamme!
     getGammes(start: Int!, count: Int!): [Gamme!]!
+
+    getFavorites: [Product!]!
 }
 
 extend type Mutation {
@@ -43,4 +45,8 @@ extend type Mutation {
 
     # Gammes
     createGamme(name: String!, description: String!, products: [Int!]): Gamme!
+
+    # Favorites
+    addProductToFavorites(id: ID!): ID!
+    removeProductFromFavorites(id: ID!): ID!
 }

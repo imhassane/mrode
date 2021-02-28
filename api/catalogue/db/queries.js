@@ -273,3 +273,38 @@ exports.GET_ORDER_PRODUCTS = `
     WHERE ord_id = $1
     ORDER BY pop.pop_id
 `;
+
+exports.ADD_PRODUCT_TO_FAVORITES = `
+    INSERT INTO mlm_favorites_products_mfp (pro_id, mid_id)
+    VALUES ($1, $2)
+    RETURNING *
+`;
+
+exports.ADD_MLM_USER_PRODUCT_COUNT = `
+    UPDATE mlm_identity_mid
+        SET mid_favorites_count = mid_favorites_count + 1
+    WHERE mid_id = $1
+`;
+
+exports.SUB_MLM_USER_PRODUCT_COUNT = `
+    UPDATE mlm_identity_mid
+        SET mid_favorites_count = mid_favorites_count - 1
+    WHERE mid_id = $1
+`;
+
+exports.REMOVE_PRODUCT_FROM_FAVORITES = `
+    DELETE FROM mlm_favorites_products_mfp
+    WHERE pro_id = $1 AND mid_id = $2
+    RETURNING *
+`;
+
+exports.GET_FAVORITE_PRODUCTS = `
+    SELECT
+        tpp.pro_id, pro_name, pro_slug, pro_reference,
+        pro_price, pro_margin, pro_selling_start, pro_selling_end,
+        pro_status, pro_article, pro_inserted_at,
+        pro_updated_at, pro_description
+    FROM mlm_favorites_products_mfp
+    JOIN t_product_pro AS tpp USING (pro_id)
+    WHERE mid_id = $1
+`;

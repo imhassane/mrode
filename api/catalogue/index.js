@@ -13,10 +13,20 @@ const resolvers = {
     ...require("./resolvers"),
 };
 
+const i18n = require('./internationalization');
+
 const server = new ApolloServer({
     schema: buildFederatedSchema({ typeDefs, resolvers }),
     context({ req }) {
+        const mlmUser = req.headers.mlmuser ? parseInt(req.headers.mlmuser) : null;
+        const context =  {
+            lang: req.headers.lang,
+            user: req.headers.user,
+            i18n: i18n(req.headers.lang),
+            mlmUser,
+        };
 
+        return context;
     }
 });
 
