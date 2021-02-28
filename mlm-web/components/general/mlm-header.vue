@@ -1,32 +1,43 @@
 <template>
-  <header class="z-50 bg-white md:flex h-12 border-b-2 sticky top-0">
-    <div class="md:w-20 border-r-2 text-center flex flex-col justify-center">
+  <header class="z-50 bg-white flex h-12 border-b-2 sticky top-0">
+    <div class="w-20 border-r-2 text-center flex flex-col justify-center">
       <span class="fas fa-bars cursor-pointer" @click="onTextBarDisplayChange"></span>
     </div>
-    <div class="flex-1 md:flex items-center">
-      <div class="md:w-1/2 flex flex-col justify-center px-3 py-0">
+    <div class="flex-1 flex items-center">
+      <div class="hidden md:w-1/2 md:flex flex-col justify-center px-3 py-0">
         <mlm-search />
       </div>
-      <div class="md:w-64">
+      <div class="hidden md:block md:w-64">
         <p class="text-sm" v-if="$auth.user.address">
-          <i class="fas fa-location-arrow mr-1"></i>
+          <client-only><i class="fas fa-location-arrow mr-1"></i></client-only>
           {{ renderAddress($auth.user.address )}}
         </p>
       </div>
-      <div class="flex-1 md:flex flex-col justify-center px-1">
-        <ul class="md:flex justify-end">
+      <div class="flex-1 flex flex-col justify-center px-1">
+        <ul class="flex justify-end">
           <li class="relative">
-            <nuxt-link to="/panier/"><i class="fas fa-shopping-cart w-8 mx-1"></i></nuxt-link>
+            <nuxt-link to="/panier/">
+              <client-only><i class="fas fa-shopping-cart w-8 mx-1"></i></client-only>
+            </nuxt-link>
             <p class="absolute text-xs h-5 w-5 flex items-center justify-center rounded"
                style="right: 7px; top: -10px;">
               {{ $store.state.cart.quantity }}
             </p>
           </li>
-          <li>
-            <i class="fas fa-bell w-8 mx-1"></i>
+          <li class="relative">
+            <nuxt-link to="/favoris">
+              <client-only><i class="fas fa-heart w-8 mx-1"></i></client-only>
+            </nuxt-link>
+            <p class="absolute text-xs h-5 w-5 flex items-center justify-center rounded"
+               style="right: 7px; top: -10px;">
+              {{ $auth.user.favoritesCount }}
+            </p>
           </li>
           <li>
-            <i class="fas fa-envelope w-8 mx-1"></i>
+            <client-only><i class="fas fa-bell w-8 mx-1"></i></client-only>
+          </li>
+          <li>
+            <client-only><i class="fas fa-envelope w-8 mx-1"></i></client-only>
           </li>
           <li>
             <img :src="$auth.user.avatarUrl"
@@ -35,7 +46,10 @@
             />
           </li>
           <li>
-            <i class="fas fa-cog w-8"></i>
+            <client-only><i class="fas fa-cog w-8"></i></client-only>
+          </li>
+          <li>
+            <lang-switcher />
           </li>
         </ul>
       </div>
@@ -45,9 +59,10 @@
 
 <script>
 import MlmSearch from "../forms/mlm-search";
+import LangSwitcher from "../lang-switcher";
 export default {
   name: "mlm-header",
-  components: {MlmSearch},
+  components: {LangSwitcher, MlmSearch},
   props: ["onTextBarDisplayChange"],
   methods: {
     renderAddress(address) {

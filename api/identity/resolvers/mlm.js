@@ -155,9 +155,11 @@ const authenticateMlmMember = async (parent, args, ctx) => {
         const token = await jwt.sign(payload, process.env.JWT_SECRET, {
             expiresIn: "2h",
         });
+        const user = await authenticatedMlmMember(null, null, { ...ctx, mlmUser: mlm_id});
         return {
             type: "mlm",
             token,
+            user
         };
     } catch (ex) {
         if(error) throw new ApolloError(error);

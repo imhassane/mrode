@@ -7,8 +7,8 @@
         class="bg-white border mb-3 px-2 py-4"
       >
         <div class="flex">
-          <div class="w-20 py-2">
-            <img class="object-cover mx-auto w-12 h-12 rounded-full" :src="q.mid_avatar_url" alt="" />
+          <div class="md:w-20 py-2">
+            <img class="object-cover mx-auto w-10 h-10 md:w-12 md:h-12 rounded-full" :src="q.mid_avatar_url" alt="" />
           </div>
           <div class="px-3">
             <p>
@@ -18,7 +18,7 @@
             <p class="my-2 font-semibold text-xl">{{ q.fth_title }}</p>
           </div>
         </div>
-        <div class="flex">
+        <div class="flex text-sm md:text-base">
           <div class="w-20 mr-4 py-2 text-center">
             <p><i class="fas fa-chevron-up"></i></p>
             <p>{{ q.fth_up_votes }}</p>
@@ -26,14 +26,14 @@
           </div>
           <div class="px-3">
             <div v-html="q.fth_content"></div>
-            <div class="my-3 bg-gray-50 px-3 py-2">
-              <button class="btn-primary mr-4"><i class="fas fa-comments mr-2"></i> {{ q.fth_answers_count }} réponse{{ q.fth_answers_count > 0 ? "s" : "" }}</button>
-              <button class="btn-primary mr-4"><i class="fas fa-eye mr-2"></i> {{ q.fth_views }} vues </button>
+            <div class="flex gap-x-3 my-3 bg-gray-50 px-3 py-2">
+              <button class="btn-primary"><i class="fas fa-comments mr-2"></i> {{ q.fth_answers_count }} réponse{{ q.fth_answers_count > 0 ? "s" : "" }}</button>
+              <button class="btn-primary"><i class="fas fa-eye mr-2"></i> {{ q.fth_views }} vues </button>
             </div>
           </div>
         </div>
         <div class="flex mt-3">
-          <div class="w-20"></div>
+          <div class="md:w-20"></div>
           <div class="flex-1 text-xs" v-if="q.fth_answers_count">
 
             <div class="flex flex-col gap-y-2" v-if="shouldRenderReplies[i]">
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="flex mt-3">
-          <div class="w-20"></div>
+          <div class="md:w-20"></div>
           <div class="flex-1">
             <textarea placeholder="Répondre"
                       @focusin="handleReplyFieldFocus" @focusout="handleReplyFieldFocusOut"

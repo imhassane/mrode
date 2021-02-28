@@ -169,6 +169,7 @@ exports.GET_MLM_MEMBER = `
         mid.mid_id, mid_first_name, mid_last_name, mid_email,
         mid_status, mid_inserted_at, mid_updated_at,
         mid_access_code, mid_avatar, mid_avatar_url,
+        mid_favorites_count,
         mia.mia_id, mia_street_name, mia_street_number, mia_country,
         mia_inserted_at, mia_updated_at, mia_postal_code, mia_city
     FROM mlm_identity_mid as mid
@@ -190,7 +191,8 @@ exports.GET_MLM_MEMBER_HIERARCHY= `
     SELECT
         mid_id, mid_first_name, mid_last_name, mid_email,
         mid_status, mid_inserted_at, mid_updated_at,
-        mid_access_code, mid_avatar, mid_avatar_url
+        mid_access_code, mid_avatar, mid_avatar_url,
+        mid_favorites_count
     FROM mlm_identity_mid
     JOIN mlm_identity_documents USING (mid_id)
     WHERE added_by = $1

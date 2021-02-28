@@ -14,10 +14,19 @@ export default class CustomScheme extends LocalScheme {
       return
     }
 
+    const res = await fetch({
+      method: "post",
+      url: process.env.API_URL,
+      body: JSON.stringify({
+        query: "",
+        variables: {}
+      })
+    });
+
     // Try to fetch user and then set
     return this.$auth.requestWith(
       this.name,
-      endpoint,
+      "http://localhost:4000",
       this.options.endpoints.user
     ).then((response) => {
       const user = getProp(response.data, this.options.user.property)

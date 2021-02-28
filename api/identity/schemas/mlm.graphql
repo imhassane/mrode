@@ -13,6 +13,7 @@ type MlmMember @key(fields: "id") {
     emailValidatedAt: DateTime
     avatar: String!
     avatarUrl: String!
+    favoritesCount: Int!
     # Informations officielles.
     documents: Documents!
     addresses: [Address!]!

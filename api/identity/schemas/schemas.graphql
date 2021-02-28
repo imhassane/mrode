@@ -2,6 +2,7 @@ enum AuthTokenType { MLM, ADMINISTRATION }
 type AuthToken {
     type: AuthTokenType!
     token: ID!
+    user: MlmMember!
 }
 
 extend type Query {

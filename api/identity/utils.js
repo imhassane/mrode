@@ -69,7 +69,7 @@ exports.makeMember = mem => {
 };
 
 exports.makeMlmMember = mem => {
-    let m = { address: null };
+    let m = { address: null, favoritesCount: 0 };
 
     if(mem.mid_id) m.id = mem.mid_id;
     if(mem.mid_email) m.email = mem.mid_email;
@@ -81,6 +81,7 @@ exports.makeMlmMember = mem => {
     if(mem.mid_access_code) m.accessCode = mem.mid_access_code;
     if(mem.mid_avatar) m.avatar = mem.mid_avatar;
     if(mem.mid_avatar_url) m.avatarUrl = mem.mid_avatar_url;
+    if(mem.mid_favorites_count) m.favoritesCount = mem.mid_favorites_count;
 
     const address = makeAddress(mem);
     if(address)

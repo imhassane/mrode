@@ -90,8 +90,7 @@ export const actions = {
       sameSite: true,
     });
   },
-
   getCartCookies() {
     return CART_COOKIE;
-  }
+  },
 };

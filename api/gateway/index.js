@@ -10,6 +10,7 @@ const gateway = new ApolloGateway({
         { name: "identity", url: "http://localhost:4001" },
         { name: "catalogue", url: "http://localhost:4002" },
         { name: "orders", url: "http://localhost:4003" },
+        { name: "stats", url: "http://localhost:4005"},
     ],
     buildService: ({url}) => new RemoteGraphQLDataSource({
         url,

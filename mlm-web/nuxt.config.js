@@ -27,7 +27,8 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     './plugins/api.js',
-    './plugins/auth.js'
+    './plugins/auth.js',
+    { src: './plugins/vue-tour.js', mode: 'client' },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -50,7 +51,8 @@ export default {
     'nuxt-i18n',
     'cookie-universal-nuxt',
     '@nuxtjs/cloudinary',
-    '@nuxtjs/apollo'
+    '@nuxtjs/apollo',
+    '@nuxtjs/auth-next'
   ],
 
   serverMiddleware: [
@@ -76,6 +78,58 @@ export default {
     config: {}
   },
 
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          autoFetch: false
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get' }
+        }
+      },
+      google: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: "",
+          token: "",
+          userInfo: "",
+          logout: ""
+        },
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: 1800
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        responseType: 'token',
+        grantType: 'authorization_code',
+        accessType: undefined,
+        redirectUri: undefined,
+        logoutRedirectUri: undefined,
+        clientId: '967465075436-flqr8d3jjb9saeaku7rliojhk32nr4r3.apps.googleusercontent.com',
+        scope: ['openid', 'profile', 'email'],
+        state: 'UNIQUE_AND_NON_GUESSABLE',
+      }
+    },
+    redirect: {
+      login: '/comptes/connexion',
+      logout: '/',
+      callback: '/comptes/connexion',
+      home: '/'
+    }
+  },
+
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
 
@@ -98,5 +152,8 @@ export default {
 
   env: {
     REGISTER_STEP_1: "JrlP4ilBUuMyb8C",
+    GOOGLE_AUTH_CLIENT_ID: "967465075436-flqr8d3jjb9saeaku7rliojhk32nr4r3.apps.googleusercontent.com",
+    GOOGLE_AUTH_ACCESS_CODE: "q5S6W-GJqoI2zz5CaMuqUCNy",
+    API_URL: "http://localhost:4000"
   }
 }

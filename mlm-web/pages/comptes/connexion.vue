@@ -71,17 +71,8 @@ export default {
 
       try {
         await this.$store.commit('setLoading', true);
-        const { data: { authenticateMlmMember } } =
-          await this.$apollo.mutate({
-            mutation: gql`mutation ($code: String!, $password: String!) { authenticateMlmMember(code: $code, password: $password) { token }}`,
-            variables: values,
-          });
-
-        this.$cookies.set("authentication", authenticateMlmMember.token, {
-          path: "/"
-        });
-
-        await this.$router.push("/");
+        const result = await this.$auth.loginWith('local', { data: values });
+        console.log(result)
       } catch (ex) {
         await this.$store.dispatch('messages/handleError', ex);
       } finally {

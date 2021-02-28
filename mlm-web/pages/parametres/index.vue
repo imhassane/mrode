@@ -82,7 +82,7 @@
             </div>
             <div class="w-auto">
               <span
-                class="text-sm text-white bg-green-500 p-1 rounded border border-green-500"
+                class="tag tag-primary"
                 v-if="add.mainAddress"
               >Adresse actuelle</span>
             </div>

@@ -6,6 +6,7 @@ const GET_MEMBER = gql`
       id
       firstName, lastName, avatarUrl,
       address { street {name, number}, country, city, postalCode }
+      favoritesCount
     }
   }
 `;
@@ -23,12 +24,6 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({commit}, ctx) {
     try {
-      const client = ctx.app.apolloProvider.defaultClient;
-      const { data: { authenticatedMlmMember } } = await client.query({
-        query: GET_MEMBER,
-      });
-      commit('auth/setUser', authenticatedMlmMember);
-      commit('auth/setAuth', true);
 
       // Cart.
       const { data } = await ctx.$api.$get("/cart");
