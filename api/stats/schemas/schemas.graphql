@@ -1,0 +1,46 @@
+enum PeriodType {
+    HOUR,
+    DAY, WEEK, MONTH, YEAR
+}
+
+type ProductsSellsByPeriod {
+    labels: [String!]!
+    ordersCount: [Int!]!
+    itemsCount: [Int!]!
+    ids: [ID!]!
+}
+
+type ProductsTrends {
+    labels: [String!]!
+    datasets: [ProductsTrendsDatasets!]!
+}
+
+type ProductsTrendsDatasets {
+    label: String!
+    id: ID!
+    periods: [DateTime!]!
+    data: [ProductsTrendsDatasetsData!]!
+}
+
+type ProductsTrendsDatasetsData {
+    ordersCount: Int!
+    itemsCount: Int!
+}
+
+type ProductsPercentage {
+    labels: [String!]!
+    totalProducts: Int!
+    totalItems: Int!
+    datasets: ProductsPercentageDataset!
+}
+
+type ProductsPercentageDataset {
+    itemsCount: [Float!]
+    ordersCount: [Float!]
+}
+
+extend type Query {
+    getProductSellsByPeriod(start: DateTime!, end: DateTime!): ProductsSellsByPeriod!
+    getTrends(period: PeriodType!, start: DateTime!, end: DateTime!): ProductsTrends!
+    getProductsPercentage(start: DateTime!, end: DateTime!): ProductsPercentage!
+}
