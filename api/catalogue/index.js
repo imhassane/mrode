@@ -18,7 +18,10 @@ const i18n = require('./internationalization');
 const server = new ApolloServer({
     schema: buildFederatedSchema({ typeDefs, resolvers }),
     context({ req }) {
+        if(req.headers.user === 'null') req.headers.user = null;
+        if(req.headers.mlmuser === 'null') req.headers.mlmuser = null;
         const mlmUser = req.headers.mlmuser ? parseInt(req.headers.mlmuser) : null;
+
         const context =  {
             lang: req.headers.lang,
             user: req.headers.user,

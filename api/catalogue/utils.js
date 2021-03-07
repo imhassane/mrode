@@ -161,3 +161,47 @@ exports.makeGamme = val => {
 
     return g;
 };
+
+// Formations
+exports.makeFormation = form => {
+    let f = { isRequired: false, isVisible: false, contentCount: 0, price: 0, };
+
+    if(form.for_id) f.id = form.for_id;
+    if(form.for_name) f.name = form.for_name;
+    if(form.for_locale) f.locale = form.for_locale;
+    if(form.for_cover) f.cover = form.for_cover;
+    if(form.for_required) f.isRequired = true;
+    if(form.for_visible) f.isVisible = true;
+    if(form.for_description) f.description = form.for_description;
+    if(form.for_slug) f.slug = form.for_slug;
+    if(form.for_price) f.price = form.for_price;
+    if(form.for_inserted_at) f.insertedAt = form.for_inserted_at;
+    if(form.for_updated_at) f.updatedAt = form.for_updated_at;
+    if(form.for_content_count) f.contentCount = form.for_content_count;
+
+    f.totalNotes = form.for_total_notes;
+    f.countNotes = form.for_notes_count;
+    f.note = f.countNotes > 0 ? f.totalNotes / f.countNotes : 0;
+
+    return f;
+}
+
+exports.makeFormationContent = form => {
+    let f = { isPreview: false, isVisible: false, viewsCount: 0, rank: 0 };
+
+    if(form.fco_id) f.id = form.fco_id;
+    if(form.fco_name) f.name = form.fco_name;
+    if(form.fco_slug) f.slug = form.fco_slug;
+    if(form.fco_duration) f.duration = form.fco_duration;
+    if(form.fco_url) f.url = form.fco_url;
+    if(form.fco_cover) f.cover = form.fco_cover;
+    if(form.fco_views_count) f.viewsCount = form.fco_views_count;
+    if(form.fco_type) f.type = form.fco_type;
+    if(form.fco_is_preview) f.isPreview = true;
+    if(form.fco_is_visbile) f.isVisible = true;
+    if(form.fco_rank) f.rank = form.fco_rank;
+    if(form.fco_inserted_at) f.insertedAt = form.fco_inserted_at;
+    if(form.fco_updated_at) f.updatedAt = form.fco_updated_at;
+
+    return f;
+}

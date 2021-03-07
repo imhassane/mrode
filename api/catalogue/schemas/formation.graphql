@@ -1,0 +1,50 @@
+type Formation @key(fields: "id") {
+    id: ID!
+    name: String!
+    slug: String!
+    price: Float!
+    locale: String!
+    locales: [String!]
+    isRequired: Boolean!
+    isVisible: Boolean!
+    description: String!
+    totalNotes: Int!
+    countNotes: Int!
+    note: Float!
+    cover: String!
+
+    allContent: [FormationContent!]!
+    content: [FormationContent!]!
+    contentCount: Int!
+
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type FormationContent {
+    id: ID!
+    name: String!
+    duration: Int!
+    url: String!
+    cover: String!
+    isPreview: Boolean!
+    isVisible: Boolean!
+    viewsCount: Int!
+    rank: Int!
+    type: FormationContentType!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+enum FormationContentType { ARTICLE, VIDEO }
+
+type MlmMemberFormations {
+    formations: [Formation!]!
+    hasAllRequiredFormations: Boolean!
+    remainingRequiredFormations: [ID!]
+}
+
+extend type MlmMember @key(fields: "id") {
+    id: ID! @external
+    formationsInfos: MlmMemberFormations!
+}

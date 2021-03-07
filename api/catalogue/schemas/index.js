@@ -5,6 +5,7 @@ const category = fs.readFileSync(path.join(__dirname + "/category.graphql"));
 const product = fs.readFileSync(path.join(__dirname + "/product.graphql"));
 const gamme = fs.readFileSync(path.join(__dirname + "/gamme.graphql"));
 const cover = fs.readFileSync(path.join(__dirname + "/cover.graphql"));
+const formation = fs.readFileSync(path.join(__dirname + "/formation.graphql"));
 const schema = fs.readFileSync(path.join(__dirname + "/schemas.graphql"));
 
 module.exports = `
@@ -14,5 +15,6 @@ module.exports = `
     ${category}
     ${product}
     ${gamme}
+    ${formation}
     ${schema}
 `;

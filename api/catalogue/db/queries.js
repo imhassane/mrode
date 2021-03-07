@@ -308,3 +308,63 @@ exports.GET_FAVORITE_PRODUCTS = `
     JOIN t_product_pro AS tpp USING (pro_id)
     WHERE mid_id = $1
 `;
+
+exports.CREATE_FORMATION = `
+    INSERT INTO t_formation_for (for_name, for_price, for_locale, for_cover, for_required, for_description, for_description_tokens, for_slug)
+    VALUES ($1, $2, $3, $4, $5, $6, to_tsvector($6), $7)
+    RETURNING *
+`;
+
+exports.GET_FORMATION = `
+    SELECT
+        for_id, for_name, for_price, for_locale, for_cover, for_required,
+        for_description, for_total_notes, for_notes_count, for_inserted_at,
+        for_updated_at, for_slug, for_visible, for_content_count
+    FROM t_formation_for
+    WHERE for_id = $1
+`;
+
+exports.GET_ALL_FORMATIONS = `
+    SELECT
+        for_id, for_name, for_price, for_locale, for_cover, for_required,
+        for_description, for_total_notes, for_notes_count, for_inserted_at,
+        for_updated_at, for_slug, for_visible, for_content_count
+    FROM t_formation_for
+    ORDER BY for_id DESC
+`;
+
+exports.GET_MLM_FORMATIONS = `
+    SELECT
+        for_id, for_name, for_price, for_locale, for_cover, for_required,
+        for_description, for_total_notes, for_notes_count, for_inserted_at,
+        for_updated_at, for_slug, for_visible, for_content_count
+    FROM t_formation_for
+    WHERE for_visible = true AND for_id NOT IN (SELECT for_id FROM mlm_identity_formation WHERE mid_id = $1)
+    ORDER BY for_id DESC
+`;
+
+exports.GET_MLM_MEMBER_FORMATIONS = `
+    SELECT
+        tff.for_id, for_name, for_price, for_locale, for_cover, for_required,
+        for_description, for_total_notes, for_notes_count, for_inserted_at,
+        for_updated_at, for_slug, for_visible, for_content_count
+    FROM t_formation_for as tff
+    JOIN mlm_identity_formation USING (for_id)
+    WHERE mid_id = $1
+    ORDER BY for_id DESC
+`;
+
+exports.INSERT_FORMATION_CONTENT = `
+    INSERT INTO t_formation_content_fco (fco_name, fco_duration, fco_url, fco_cover, fco_is_preview, fco_type, for_id, fco_slug, fco_rank)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, (SELECT COUNT(fco_id) + 1 FROM t_formation_content_fco WHERE for_id = $7)) 
+    RETURNING *
+`;
+
+exports.GET_ALL_FORMATION_CONTENT = `
+    SELECT
+        fco_id, fco_name, fco_duration, fco_url, fco_cover, fco_is_preview, fco_views_count, fco_type,
+        fco_inserted_at, fco_updated_at, fco_is_visible, fco_slug, fco_rank
+    FROM t_formation_content_fco
+    WHERE for_id = $1
+    ORDER BY fco_rank ASC
+`;

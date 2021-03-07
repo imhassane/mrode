@@ -10,6 +10,12 @@ extend type Query {
     getGammes(start: Int!, count: Int!): [Gamme!]!
 
     getFavorites: [Product!]!
+
+    # Formation
+    getFormation(id: ID!): Formation!
+    getMlmFormations: [Formation!]!
+    getAllFormations: [Formation!]!
+    getMlmMemberFormations(id: ID!): [Formation!]!
 }
 
 extend type Mutation {
@@ -49,4 +55,16 @@ extend type Mutation {
     # Favorites
     addProductToFavorites(id: ID!): ID!
     removeProductFromFavorites(id: ID!): ID!
+
+    # Formations
+    addFormation(
+        name: String!, price: Float!, locale: String!, cover: String!
+        required: Boolean, description: String!
+    ): Formation!
+    addFormationContent(
+        formationId: ID!, name: String!, duration: Int!, url: String!,
+        cover: String!, isPreview: Boolean!, formationType: FormationContentType!
+    ): FormationContent!
+    switchFormationVisible(id: ID!): Formation!
+    subscribeToFormation(formationId: ID!): Formation!
 }
