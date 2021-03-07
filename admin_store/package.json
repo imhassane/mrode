@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^3.4.2",
+    "@nuxtjs/vuetify": "^1.11.3",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",

@@ -1,20 +1,31 @@
 export const state = () => ({
   error: null,
   infos: null,
+  showError: false,
+  showInfos: false,
 });
 
 export const mutations = {
   setError(state, error) {
     state.error = error;
     state.infos = null;
+
+    state.showError = true;
+    state.showInfos = false;
   },
   setInfos(state, infos) {
     state.infos = infos;
     state.error = null;
+
+    state.showInfos = true;
+    state.showError = false;
   },
   removeMessages(state) {
     state.infos = null;
     state.error = null;
+
+    state.showError = false;
+    state.showInfos = false;
   }
 };
 

@@ -32,6 +32,7 @@ export default {
       { to: "categories", name: "Categories", icon: "fas fa-images" },
       { to: "products", name: "Produits", icon: "fas fa-shopping-bag" },
       { to: "gammes", name: "Gammes", icon: "fas fa-hashtag" },
+      { to: "formations", name: "Formations", icon: "fas fa-graduation-cap" },
     ])
   }
 }

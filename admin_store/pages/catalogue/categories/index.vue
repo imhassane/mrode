@@ -60,8 +60,10 @@ export default {
     getCategories: {
       query: GET_CATEGORIES,
       error(err) {
-        if(err.graphQLErrors)
+        if(err.graphQLErrors && err.graphQLErrors.length)
           this.error = err.graphQLErrors[0].message;
+        else
+          this.error = err.message;
       }
     }
   }
