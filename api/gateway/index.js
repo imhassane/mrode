@@ -7,10 +7,10 @@ if (process.env.NODE_ENV !== 'PROD')
 
 const gateway = new ApolloGateway({
     serviceList: [
-        { name: "identity", url: "http://localhost:4001" },
-        { name: "catalogue", url: "http://localhost:4002" },
-        { name: "orders", url: "http://localhost:4003" },
-        { name: "stats", url: "http://localhost:4005"},
+        { name: "identity", url: "http://localhost:6001" },
+        { name: "catalogue", url: "http://localhost:6002" },
+        { name: "orders", url: "http://localhost:6003" },
+        { name: "stats", url: "http://localhost:6005"},
     ],
     buildService: ({url}) => new RemoteGraphQLDataSource({
         url,
@@ -34,7 +34,10 @@ const context = async ({ req }) => {
     try {
         if(token) {
             let source = "";
-            const tokens = token.split(" ");
+            let tokens = token.split(" ");
+            if(token.includes("%20"))
+                tokens = token.split("%20");
+
             if(tokens.length === 1)
                 token = tokens[0];
             else {
