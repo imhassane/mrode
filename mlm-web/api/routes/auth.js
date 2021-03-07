@@ -15,6 +15,7 @@ router.post("/login", async (req, res) => {
             firstName, lastName, avatarUrl,
             address { street {name, number}, country, city, postalCode }
             favoritesCount
+            formationsInfos { hasAllRequiredFormations }
           }
         }
       }
@@ -23,7 +24,8 @@ router.post("/login", async (req, res) => {
     });
 
     return res.json(authenticateMlmMember);
-  } catch {
+  } catch (ex) {
+    console.log(ex.message)
     return res.status(500).send({ message: "Une erreur s'est produite" })
   }
 });
@@ -48,6 +50,7 @@ router.get("/user", async (req, res) => {
               firstName, lastName, avatarUrl,
               address { street {name, number}, country, city, postalCode }
               favoritesCount
+              formationsInfos { hasAllRequiredFormations }
             }
           }
         `
@@ -60,8 +63,8 @@ router.get("/user", async (req, res) => {
       }
     );
     return res.json({ user });
-  } catch (ex) {
-    console.log(ex.message)
+  } catch {
+
     return res.status(500).send({ message: "Une erreur s'est produite" });
   }
 });

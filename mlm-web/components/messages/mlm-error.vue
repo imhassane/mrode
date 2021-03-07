@@ -1,5 +1,20 @@
 <template>
-  <div class="error-block mb-4" @click="removeMessage">{{ messages.error }}</div>
+  <v-snackbar
+    v-model="messages.showError"
+  >
+    {{ messages.error }}
+
+    <template v-slot:action="{ attrs }">
+      <v-btn
+        color="pink"
+        text
+        v-bind="attrs"
+        @click="removeMessage"
+      >
+        Fermer
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>

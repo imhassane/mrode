@@ -1,5 +1,5 @@
 <template>
-  <header class="z-50 bg-white flex h-12 border-b-2 sticky top-0">
+  <header class="z-50 bg-white dark-bg flex h-12 border-b-2 sticky top-0">
     <div class="w-20 border-r-2 text-center flex flex-col justify-center">
       <span class="fas fa-bars cursor-pointer" @click="onTextBarDisplayChange"></span>
     </div>
@@ -14,7 +14,7 @@
         </p>
       </div>
       <div class="flex-1 flex flex-col justify-center px-1">
-        <ul class="flex justify-end">
+        <ul class="flex gap-x-1 justify-end">
           <li class="relative">
             <nuxt-link to="/panier/">
               <client-only><i class="fas fa-shopping-cart w-8 mx-1"></i></client-only>
@@ -49,6 +49,11 @@
             <client-only><i class="fas fa-cog w-8"></i></client-only>
           </li>
           <li>
+            <client-only>
+              <i class="fas fa-moon cursor-pointer" @click="$store.dispatch('switchThemeMode')"></i>
+            </client-only>
+          </li>
+          <li class="ml-2">
             <lang-switcher />
           </li>
         </ul>
@@ -69,7 +74,7 @@ export default {
       return `
         ${address.street.number} ${address.street.name}, ${address.postalCode}, ${address.country}
       `;
-    }
+    },
   }
 }
 </script>

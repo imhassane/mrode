@@ -2,10 +2,10 @@
   <div>
     <mlm-title title="Paramètres" />
     <div class="flex mt-4">
-      <div class="flex-1 bg-white mr-3 py-4 border">
+      <div class="flex-1 bg-white dark-bg mr-3 py-4 border">
         <NuxtChild />
       </div>
-      <div class="w-64 bg-white border rounded">
+      <div class="w-64 bg-white dark-bg border rounded">
         <ul>
           <li :class="liClass">
             <nuxt-link to="/parametres">Compte</nuxt-link>

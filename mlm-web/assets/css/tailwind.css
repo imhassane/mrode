@@ -13,7 +13,7 @@
     @apply block text-sm mb-2;
   }
   input, select {
-    @apply border rounded bg-gray-50 px-2 py-1 text-gray-500;
+    @apply border rounded bg-gray-50 px-2 py-1 text-gray-500 dark:bg-gray-200;
   }
   button {
     @apply border rounded text-sm text-white shadow px-2 py-1;
@@ -51,5 +51,10 @@
 
   .tag-primary {
     @apply border-green-500 bg-green-500;
+  }
+
+  /* Dark Mode */
+  .dark-bg {
+    @apply dark:bg-gray-800 dark:border-gray-300;
   }
 }

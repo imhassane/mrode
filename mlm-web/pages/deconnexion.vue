@@ -1,12 +1,13 @@
 <template>
-  <div></div>
+  <div>
+    <h1>Vous êtes déconnecté, on espère vous revoir bientôt</h1>
+  </div>
 </template>
 
 <script>
 export default {
-  asyncData(ctx) {
-   ctx.$cookies.remove("authentication");
-   ctx.store.commit('auth/setAuth', false);
+  async mounted() {
+    await this.$auth.logout();
   }
 }
 </script>

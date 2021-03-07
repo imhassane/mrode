@@ -1,17 +1,14 @@
 <template>
-  <div class="">
+  <div class="dark:bg-gray-800 dark:text-gray-300">
     <mlm-header :on-text-bar-display-change="handleLeftBarTextDisplay" />
-    <div class="md:flex bg-gray-100">
+    <div class="md:flex bg-gray-100 dark-bg">
       <div class="md:block relative mr-4" :class="{ 'md:w-40': showLeftBarText, 'md:w-10': !showLeftBarText, 'hidden': hideLeftBar}">
         <left-bar :show-description="showLeftBarText" />
       </div>
       <main class="md:flex-1 px-3 py-4" style="min-height: 92vh;">
-        <div class="absolute bottom-0 w-full">
-          <div class="md:w-2/3 mx-auto">
-            <mlm-error v-if="messages.error" />
-            <mlm-infos v-else-if="messages.infos" />
-          </div>
-        </div>
+        <mlm-error v-if="messages.showError" />
+        <mlm-infos v-else-if="messages.showInfos" />
+
         <as-loading v-if="loading" />
         <Nuxt />
       </main>

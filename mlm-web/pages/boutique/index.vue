@@ -1,8 +1,25 @@
+<i18n lang="yaml">
+  fr:
+    requiredFormations: "Vous devez acheter les kits de bases pour pouvoir passer une commande"
+
+  en:
+    requiredFormations: "You need to buy the basic kits to use our shop"
+</i18n>
+
 <template>
   <as-loading v-if="$apollo.loading" />
   <div v-else>
     <p class="pb-1 border-b font-bold text-xl">Catalogues</p>
     <mlm-catalogue-list :catalogues="catalogues" />
+
+    <v-alert
+      v-if="!$auth.hasAllRequiredFormations"
+      border="top"
+      color="indigo"
+      dark
+    >
+      {{ $t('requiredFormations') }}
+    </v-alert>
 
     <p class="my-4 pb-2 font-bold text-xl border-b">Derniers produits</p>
     <mlm-products-list v-if="getStoreProducts" :products="getStoreProducts" />

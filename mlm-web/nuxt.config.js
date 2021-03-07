@@ -38,6 +38,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/vuetify'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -76,6 +78,10 @@ export default {
     configPath: 'tailwind.config.js',
     exposeConfig: false,
     config: {}
+  },
+
+  colorMode: {
+    classSuffix: ''
   },
 
   auth: {

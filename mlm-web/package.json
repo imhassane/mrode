@@ -37,7 +37,9 @@
     "vue-tour": "^1.5.0"
   },
   "devDependencies": {
+    "@nuxtjs/color-mode": "^2.0.3",
     "@nuxtjs/tailwindcss": "^3.4.2",
+    "@nuxtjs/vuetify": "^1.11.3",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9.8.6",
     "dotenv": "^8.2.0",

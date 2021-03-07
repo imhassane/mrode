@@ -1,5 +1,20 @@
 <template>
-  <div class="infos-block mb-4" @click="removeMessage">{{ messages.infos }}</div>
+  <v-snackbar
+    v-model="messages.showInfos"
+  >
+    {{ messages.infos }}
+
+    <template v-slot:action="{ attrs }">
+      <v-btn
+        color="pink"
+        text
+        v-bind="attrs"
+        @click="removeMessage"
+      >
+        Fermer
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <script>

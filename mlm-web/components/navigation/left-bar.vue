@@ -7,7 +7,7 @@
     orders: "Commandes"
     stats: "Statistiques"
     forum: "Forum"
-    notifications: "Notifications"
+    formations: "Formations"
     messages: "Messages"
     settings: "Paramètres"
     signout: "Déconnexion"
@@ -20,7 +20,7 @@
     orders: "Orders"
     stats: "Statistics"
     forum: "Forum"
-    notifications: "Notifications"
+    formations: "Formations"
     messages: "Messages"
     settings: "Settings"
     signout: "Log out"
@@ -28,7 +28,7 @@
 </i18n>
 
 <template>
-  <aside class="border-r-2 min-h-full fixed bg-white">
+  <aside class="border-r-2 min-h-full fixed bg-white dark-bg">
     <ul>
       <li :class="linkClass">
         <nuxt-link to="/tableau-de-bord" data-tour-step="gem">
@@ -79,9 +79,9 @@
         </nuxt-link>
       </li>
       <li :class="linkClass">
-        <nuxt-link to="/notifications" data-tour-step="notifications">
-          <i class="fas fa-bell mr-2"></i>
-          <span class="font-semibold" v-if="showDescription">{{ $t('notifications') }}</span>
+        <nuxt-link to="/formations" data-tour-step="formations">
+          <i class="fas fa-graduation-cap mr-2"></i>
+          <span class="font-semibold" v-if="showDescription">{{ $t('formations') }}</span>
         </nuxt-link>
       </li>
       <li :class="linkClass">
